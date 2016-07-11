@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- constuctor di, need a constructor with the parameters -->
+	<bean id="dBean1" class="com.facingsea.springexercise.d_di.bean.DBean1">
+		<constructor-arg name="name" value="zhangsan"></constructor-arg>
+		<constructor-arg name="age" value="20"></constructor-arg>
+	</bean>
+	
+	<!-- setter method di, need the default no-param constructor. -->
+	<bean id="dBean2" class="com.facingsea.springexercise.d_di.bean.DBean2">
+		<property name="name" value="lisi"></property>
+		<property name="age" value="22"></property>
+	</bean>
+	
+	<!-- 复杂对象注入：将一个prototype 注入给一个singleton -->
+	<bean id="cb2" class="com.facingsea.springexercise.d_di.bean.ComplexBean2" scope="prototype"></bean>
+	
+	<bean id="cb1" class="com.facingsea.springexercise.d_di.bean.ComplexBean1" scope="singleton">
+		<lookup-method name="getCb2" bean="cb2"/>
+	</bean>
+</beans>

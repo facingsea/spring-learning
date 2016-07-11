@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- 使用默认无参构造函数实例化，如果没有默认无参构造，将会报错 -->
+	<!-- 
+	<bean id="person" class="com.facingsea.springexercise.b_instance_bean.beans.Person"></bean>
+	 -->
+	
+	<!-- 使用静态工厂方法实例化 -->
+	<!--  
+	<bean id="person2" class="com.facingsea.springexercise.b_instance_bean.beans.PersonFactory"
+		factory-method="getPerson"></bean>
+	-->
+	
+	<!-- 使用实例工厂方法 -->
+	<bean id="personFactory2" class="com.facingsea.springexercise.b_instance_bean.beans.PersonFactory2"></bean>
+	<bean id="person3" factory-bean="personFactory2" factory-method="getPerson"></bean>
+	
+</beans>

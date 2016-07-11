@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/spring-aop"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/spring-aspects"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/spring-beans"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/spring-beans-groovy"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/spring-context"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/spring-context-support"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/spring-core"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/spring-expression"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/spring-framework-bom"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/spring-instrument"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/spring-instrument-tomcat"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/spring-jdbc"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/spring-jms"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/spring-messaging"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/spring-orm"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/spring-orm-hibernate4"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/spring-orm-hibernate5"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/spring-oxm"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/spring-test"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/spring-tx"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/spring-web"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/spring-webmvc"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/spring-webmvc-portlet"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/spring-webmvc-tiles2"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/spring-websocket"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
