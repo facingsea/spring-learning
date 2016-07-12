@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- 
+		继承，不是Java类之间的继承，而是Bean之间继承，如果多个Bean具有相同的方法和属性，则可以引入父类Bean，配置父子bean关系
+	 -->
+	<!-- extend: 指不同的bean之间有相同的属性及值，如果值不一样，不能使用继承 -->
+	<bean id="extendBeanParent" abstract="true">
+		<property name="name" value="公共name"></property>
+	</bean>
+	
+	<bean id="extendBeanChild01" parent="extendBeanParent" 
+			class="com.facingsea.springexercise.e_related_bean.beans.ExtendBeanChild01">
+		<property name="age" value="20"></property>		
+	</bean>
+	
+	<bean id="extendBeanChild02" parent="extendBeanParent" 
+			class="com.facingsea.springexercise.e_related_bean.beans.ExtendBeanChild02">
+		<property name="address" value="Beijing"></property>
+	</bean>
+	
+	
+	<!-- 
+	依赖 : 一个类内部运行依赖另一个Bean初始化一些数据（一个Bean 需要 在另一个Bean 之后进行构造 ）
+		 Bean之间数据存在依赖 SystemInit 会对 SystemInfo的 taskPeroid 任务周期进行初始化 TaskManager 
+		 需要使用 SystemInfo提供  taskPeroid 指定任务周期
+	-->
+	<bean id="systemInit" class="com.facingsea.springexercise.e_related_bean.beans.SystemInit"></bean>
+	<bean id="taskManager" class="com.facingsea.springexercise.e_related_bean.beans.TaskManager"
+			depends-on="systemInit"></bean>
+	
+	
+	<!-- 
+	引用：一个Bean可以将另一个Bean的id注入到程序中，在运行期获得其实例 （例如单例中注入prototype类型）
+	-->
+	<bean id="book" class="com.facingsea.springexercise.e_related_bean.beans.Book">
+		<property name="name" value="Thinking in Java"></property>
+	</bean>
+	<bean id="student" class="com.facingsea.springexercise.e_related_bean.beans.Student">
+		<property name="bookId">
+			<idref bean="book"/>
+		</property>
+	</bean>
+	
+	
+</beans>
