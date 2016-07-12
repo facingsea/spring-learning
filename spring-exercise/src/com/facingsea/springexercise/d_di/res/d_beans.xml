@@ -23,4 +23,46 @@
 	<bean id="cb1" class="com.facingsea.springexercise.d_di.bean.ComplexBean1" scope="singleton">
 		<lookup-method name="getCb2" bean="cb2"/>
 	</bean>
+	
+	
+	<!-- 集合类型注入测试 -->
+	<bean id="collectionBean" class="com.facingsea.springexercise.d_di.bean.CollectionBean">
+		<property name="list">
+			<list>
+				<value>list01</value>
+				<value>list02</value>
+			</list>
+		</property>
+		<property name="args">
+			<array>
+				<value>array01</value>
+				<value>array02</value>
+			</array>
+		</property>
+		<property name="set">
+			<set>
+				<value>set01</value>
+				<value>set02</value>
+			</set>
+		</property>
+		<property name="map">
+			<map>
+				<entry>
+					<key>
+						<value>key01</value>
+					</key>
+					<value>value01</value>
+				</entry>
+				<entry key="key02" value="value02">
+				</entry>
+			</map>
+		</property>
+		<property name="prop">
+			<props>
+				<prop key="pkey01">pvalue01</prop>
+				<prop key="pkey02">pvalue02</prop>
+			</props>
+		</property>
+	</bean>
+	
 </beans>
