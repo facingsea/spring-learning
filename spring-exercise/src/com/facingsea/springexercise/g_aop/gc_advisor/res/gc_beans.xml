@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 被代理目标类 -->
+	<bean id="customDAO" class="com.facingsea.springexercise.g_aop.gc_advisor.beans.CustomDAO"></bean>
+	<!-- advice -->
+	<bean id="myMethodAdvice" class="com.facingsea.springexercise.g_aop.gc_advisor.advice.MyMethodAdvice"></bean>
+	<!-- 定义切面 -->
+	<bean id="regexAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+		<property name="advice" ref="myMethodAdvice"></property>
+		<property name="patterns" value=".*.save.*"></property>
+	</bean>
+	
+	<!-- 定义代理Bean -->
+	<bean id="customDAOProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="interceptorNames" value="regexAdvisor"></property>
+		<property name="proxyTargetClass" value="true"></property>
+		<property name="target" ref="customDAO"></property>
+	</bean>
+	
+</beans>

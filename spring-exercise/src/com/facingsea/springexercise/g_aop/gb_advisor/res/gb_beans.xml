@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	
+	<!-- 方法前置增强测试 -->
+	<bean id="customerService" class="com.facingsea.springexercise.g_aop.gb_advisor.beans.CustomerServiceImpl"></bean>
+	
+	<bean id="myBeforeAdvice" class="com.facingsea.springexercise.g_aop.gb_advisor.advice.MyBeforeAdvice"></bean>
+	
+	<bean id="customerServiceProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<!-- 指定生成代理需要的接口 -->
+		<property name="proxyInterfaces" value="com.facingsea.springexercise.g_aop.gb_advisor.beans.CustomerService"></property>
+		<!-- interceptorNames 传入Advice Bean对应name,也就是拦截器的名字 -->
+		<property name="interceptorNames" value="myBeforeAdvice"></property>
+		<!-- target 针对哪个目标Bean 生成 代理，这个是必须要写的 -->
+		<property name="target" ref="customerService"></property>
+	</bean>
+
+
+	<!-- 引介增强测试 -->
+	<!-- 被代理对象 -->
+	<bean id="userService" class="com.facingsea.springexercise.g_aop.gb_advisor.beans.UserServiceImpl"></bean>
+	<!-- advice增强 -->
+	<bean id="timeIntroductionInterceptor" class="com.facingsea.springexercise.g_aop.gb_advisor.advice.TimeIntroductionInterceptor"></bean>
+	<!-- 生成代理对象 -->
+	<bean id="userServiceProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<!-- 接口 -->
+		<property name="proxyInterfaces" value="com.facingsea.springexercise.g_aop.gb_advisor.advice.TimeMonitorable"></property>
+		<!-- 针对类代理 -->
+		<property name="proxyTargetClass" value="true"></property>
+		<!-- 配置 -->
+		<property name="interceptorNames" value="timeIntroductionInterceptor"></property>
+		<!-- 代理目标类 -->
+		<property name="target" ref="userService"></property>
+	</bean>
+</beans>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 使用BeanNameAutoProxyCreator自动生成代理，但是该方法只能匹配整个Bean，无法具体到具体方法 -->
+	
+	<bean id="serviceBean" class="com.facingsea.springexercise.g_aop.gd_auto_proxy.beans.ServiceBean"></bean>
+	
+	<bean id="serviceBeanAdvice" class="com.facingsea.springexercise.g_aop.gd_auto_proxy.advice.ServiceBeanAdvice"></bean>
+	
+	<!-- 配置自动代理 -->
+	<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames" value="*Bean"></property>
+		<property name="interceptorNames" value="serviceBeanAdvice"></property>
+		<property name="optimize" value="true"></property>
+	</bean>
+	
+	
+	<!-- 使用DefaultAdvisorAutoProxyCreator，可对指定方法增强 -->
+	<!-- 
+		DefaultAdvisorAutoProxyCreator能够扫描容器中的Advisor，并将Advisor自动织入匹配的目标Bean中，
+		即为匹配的目标Bean自动创建代理。
+	    DefaultAdvisorAutoProxyCreator这个类功能更为强大，这个类的奇妙之处是他实现了BeanProcessor接口,
+	          当 ApplicationContext读如所有的Bean配置信息后，这个类将扫描上下文，
+	          寻找所有的Advistor(一个Advisor是一个切入点 和一个通知的组成)，将这些Advisor应用到所有符合切入点的Bean中
+	 -->
+	<bean id="serviceBean2" class="com.facingsea.springexercise.g_aop.gd_auto_proxy.beans.ServiceBean2"></bean>
+	
+	<bean id="serviceBeanAdvice2" class="com.facingsea.springexercise.g_aop.gd_auto_proxy.advice.ServiceBeanAdvice2"></bean>
+	
+	<bean id="regexAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+		<property name="advice" ref="serviceBeanAdvice2"></property>
+		<property name="patterns" value=".*service.*"></property>
+	</bean>
+	
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"></bean>
+	
+</beans>
