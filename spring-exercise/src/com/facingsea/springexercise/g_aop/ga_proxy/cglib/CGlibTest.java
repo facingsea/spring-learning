@@ -7,6 +7,7 @@ import org.springframework.cglib.proxy.MethodInterceptor;
 import org.springframework.cglib.proxy.MethodProxy;
 
 import com.facingsea.springexercise.g_aop.ga_proxy.cglib.beans.UserServiceImpl;
+import com.facingsea.springexercise.zz_utils.Class2File;
 
 public class CGlibTest {
 	
@@ -28,7 +29,11 @@ public class CGlibTest {
 		UserServiceImpl proxy = (UserServiceImpl) enhancer.create();
 		System.out.println("after creating ... get the class name");
 		System.out.println(proxy.getClass().getName());
+		System.out.println(proxy.hashCode());
 		proxy.saveUser();
+//		Class2File.writeClass2File(proxy.getClass().getSimpleName(), 
+//				proxy.getClass(), 
+//				"D:\\");
 	}
 
 }
