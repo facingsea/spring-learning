@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop.xsd">
+	
+	<bean id="xBean" class="com.facingsea.springexercise.h_aspectj.xml.beans.XBean"></bean>
+	<bean id="xAspect" class="com.facingsea.springexercise.h_aspectj.xml.advice.XAspect"></bean>
+	<!-- 定义切面 -->
+	<aop:config proxy-target-class="true">
+		<aop:aspect ref="xAspect">
+			<aop:pointcut expression="execution(* com.facingsea.springexercise.h_aspectj.xml.beans.XBean.*(..))" id="pointcut"/>
+			<!-- <aop:before method="before" pointcut-ref="pointcut"/>
+			<aop:after-returning method="afterReturning" pointcut-ref="pointcut" returning="retVal"/>
+			<aop:around method="around" pointcut-ref="pointcut" />
+			<aop:after-throwing method="afterThrowing" pointcut-ref="pointcut" throwing="ex"/> -->
+			<aop:after method="after" pointcut-ref="pointcut"/>
+		</aop:aspect>
+	</aop:config>
+	
+</beans>
