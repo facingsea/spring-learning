@@ -4,6 +4,11 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 全局切面
+ * @author wangzhf
+ *
+ */
 public class GlobalAspect {
 	
 	private static Logger log = LoggerFactory.getLogger(GlobalAspect.class);
@@ -16,14 +21,14 @@ public class GlobalAspect {
 	 */
 	public Object measureTime(ProceedingJoinPoint jp) throws Throwable{
 		String name = jp.getSignature().getName();
-		log.info("=======================" + name);
-		log.info("Action method start to run ....");
+		String clsName = jp.getTarget().getClass().getName();
+		log.info(clsName + "." + name + " will start ... ");
 		long start = System.currentTimeMillis();
 		
 		Object obj = jp.proceed();
 		
 		long end = System.currentTimeMillis();
-		log.info("Action method finished, it takes " + (end - start ) + " millisecond.");
+		log.info(clsName + "." + name + " finished, it takes " + (end - start ) + " millisecond.");
 		return obj;
 	}
 

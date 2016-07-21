@@ -93,6 +93,15 @@
 		</property>
 	</bean>
 	
+	
+	<!-- DAO配置 -->
+	<!-- <bean id="baseDAO" abstract="true">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	<bean id="commonDAO" class="com.facingsea.common.core.CommonDAO" parent="baseDAO"></bean>
+	 -->
 	<!-- transaction manager -->
 	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory"></property>
@@ -108,16 +117,16 @@
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<!-- 定义事务隔离级别、传播行为 -->
 		<tx:attributes>
-			<tx:method name="save*" isolation="DEFAULT" propagation="REQUIRED" />
-			<tx:method name="update*" isolation="DEFAULT" propagation="REQUIRED" />
-			<tx:method name="delete*" isolation="DEFAULT" propagation="REQUIRED" />
+			<tx:method name="save*" isolation="DEFAULT" propagation="REQUIRED" read-only="false" />
+			<tx:method name="update*" isolation="DEFAULT" propagation="REQUIRED" read-only="false" />
+			<tx:method name="delete*" isolation="DEFAULT" propagation="REQUIRED" read-only="false" />
 			<tx:method name="*" isolation="DEFAULT" propagation="REQUIRED" read-only="true"/>
 		</tx:attributes>
 	</tx:advice>
 	
 	<!-- 配置事务切面 -->
 	<aop:config>
-		<aop:pointcut expression="execution(* com.facingsea.sh.**.service..*.*(..))" id="txPointcut"/>
+		<aop:pointcut expression="execution(* com.facingsea.sh.service..*.*(..))" id="txPointcut"/>
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
 	</aop:config>
 	

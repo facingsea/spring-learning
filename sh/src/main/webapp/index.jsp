@@ -12,7 +12,7 @@
 		<input id="name" name="name" />
 		<input id="address" name="address">
 		
-		<input type="button" value="提交">
+		<input type="submit" value="提交">
 	</form>
 	
 </body>

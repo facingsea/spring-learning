@@ -19,7 +19,7 @@ public interface BaseDAO<T, ID extends Serializable> {
 	 * 保存
 	 * @param entity
 	 */
-	public void save(T entity);
+	public Serializable save(T entity);
 	
 	/**
 	 * 更新

@@ -20,17 +20,11 @@ public class UserAction {
 	
 	@Autowired
 	private UserService userService;
-
-	public UserAction() {
-		log.info("UserAction构造");
-	}
 	
 	@RequestMapping("saveUser")
 	public void saveUser(HttpServletRequest req, HttpServletResponse resp, 
 			User user){
-		System.out.println(user);
 		log.debug("debug: " + user);
-		log.info("info: " + user);
 		userService.saveUser(user);
 	}
 	

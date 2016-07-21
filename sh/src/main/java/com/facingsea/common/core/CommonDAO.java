@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Criteria;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
 /**
  * 基类的基本实现
@@ -13,11 +16,26 @@ import org.hibernate.Criteria;
  * @param <T>
  * @param <ID>
  */
-public class CommonDAO<T, ID extends Serializable> implements BaseDAO<T, Serializable> {
-
+public class CommonDAO<T, ID extends Serializable> extends HibernateDaoSupport 
+				implements BaseDAO<T, ID> {
+	
+	public CommonDAO() {
+		System.out.println("CommonDAO构造函数");
+	}
+	
+	/**
+	 * 注入sessionFactory
+	 * @param sessionFactory
+	 */
+	@Autowired
+	public void setSF(SessionFactory sessionFactory){
+		super.setSessionFactory(sessionFactory);
+	}
+	
 	@Override
-	public void save(T entity) {
-		
+	public Serializable save(T entity) {
+		Serializable id = getHibernateTemplate().save(entity);
+		return id;
 	}
 
 	@Override
